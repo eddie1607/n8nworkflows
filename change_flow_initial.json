@@ -1,0 +1,183 @@
+{
+  "name": "change_flow_initial",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "changeflow",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -352,
+        -64
+      ],
+      "id": "0095781d-15d8-40a7-aafd-a43a54723b6f",
+      "name": "Webhook",
+      "webhookId": "f63a061d-8a43-4472-9742-be1c3ff0ee27"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e7d1ef37-da6d-4422-9464-57d27050f8d8",
+              "name": "body.data.pushName",
+              "value": "={{ $json.body.data.pushName }}",
+              "type": "string"
+            },
+            {
+              "id": "60d9d913-5edb-4930-a196-56bfa3546477",
+              "name": "body.data.key.remoteJid",
+              "value": "={{ $json.body.data.key.remoteJid }}",
+              "type": "string"
+            },
+            {
+              "id": "e055d7e1-cc67-47d7-9cd2-1f212c7527bf",
+              "name": "body.data.message.conversation",
+              "value": "={{ $json.body.data.message.conversation }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -144,
+        -64
+      ],
+      "id": "1a5fe294-405b-4cde-845b-421def8555bc",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "z7jGCl8S760dvnP8",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/z7jGCl8S760dvnP8",
+          "cachedResultName": "change_flow_finish"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        -64
+      ],
+      "id": "fb155e57-8db5-4e1d-88e4-ff068ff16671",
+      "name": "Call 'change_flow_finish'",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "retryOnFail": false
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "automacao.n8nautomacao.site",
+            "user-agent": "axios/1.10.0",
+            "content-length": "648",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, br",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "200.102.119.238",
+            "cf-ipcountry": "BR",
+            "cf-ray": "9d9b5852b9265a8d-CWB",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-warp-tag-id": "af220853-291c-4695-a8f4-5d7fd4cbfbc0",
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "x-forwarded-for": "200.102.119.238",
+            "x-forwarded-proto": "https"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "messages.upsert",
+            "instance": "whats",
+            "data": {
+              "key": {
+                "remoteJid": "555198431388@s.whatsapp.net",
+                "fromMe": true,
+                "id": "2A6AAAF419DECDF2E75E"
+              },
+              "pushName": "Edmilson vieira da silva - corretor de imóveis",
+              "status": "SERVER_ACK",
+              "message": {
+                "conversation": "Oi"
+              },
+              "messageType": "conversation",
+              "messageTimestamp": 1773072576,
+              "instanceId": "21e03d35-8d49-4684-95ee-2a5efea7fece",
+              "source": "unknown"
+            },
+            "destination": "https://automacao.n8nautomacao.site/webhook-test/changeflow",
+            "date_time": "2026-03-09T13:09:38.125Z",
+            "sender": "555195827776@s.whatsapp.net",
+            "server_url": "https://evolutionapi.n8nautomacao.site/",
+            "apikey": "E2FD1D5382F1-4FB5-AE66-1562F69A7194"
+          },
+          "webhookUrl": "https://automacao.n8nautomacao.site/webhook-test/changeflow",
+          "executionMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Call 'change_flow_finish'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "6ab54e58-f90b-462c-a5cf-e8455a379e32",
+  "meta": {
+    "instanceId": "e2e400441824b6db24f6af0c9b70e2d924e9d21f9a10e30b8b4be3b81da7dbb1"
+  },
+  "id": "gEsu2pzE08qUpk4Y",
+  "tags": []
+}
